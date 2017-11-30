@@ -72,6 +72,19 @@
 
     (flycheck-fecs--parse-report (car (append reports nil)) buffer)))
 
+
+(defun flycheck-fecs--find-executable ()
+  "When fecs is not installed globally, fallback to local one."
+  (let* ((root (locate-dominating-file
+                (or (buffer-file-name) default-directory)
+                "package.json"))
+         (bin (and root
+                   (expand-file-name "node_modules/fecs/bin/fecs"
+                                     root))))
+
+    (when (and bin (file-executable-p bin))
+      (setq-local flycheck-baidu-fecs-executable bin))))
+
 (flycheck-define-checker baidu-fecs
   "A js, css, html syntax checker using FECS.
 See URL `https://github.com/ecomfe/fecs`."
@@ -82,6 +95,7 @@ See URL `https://github.com/ecomfe/fecs`."
   :predicate flycheck-fecs--predicate)
 
 (add-to-list 'flycheck-checkers 'baidu-fecs)
+(add-hook 'flycheck-mode-hook #'flycheck-fecs--find-executable)
 
 (provide 'flycheck-fecs)
 ;;; flycheck-fecs.el ends here
