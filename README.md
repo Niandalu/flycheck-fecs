@@ -5,6 +5,8 @@ This package adds support for baidu's FECS to flycheck.
 
 For more information, please check out https://github.com/ecomfe/fecs .
 
+![demo](https://raw.githubusercontent.com/niandalu/flycheck-fecs/master/doc/fecs.png "demo")
+
 ### Installation
 
 ```
