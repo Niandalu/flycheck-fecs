@@ -1,4 +1,4 @@
-flycheck
+flycheck-fecs
 =========
 
 This package adds support for baidu's FECS to flycheck.
